@@ -1,0 +1,96 @@
+﻿@model IEnumerable<LetsChatFinal.Models.Post>
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LetsChatFinal.styles.css" asp-append-version="true" />
+</head>
+@{
+    ViewData["Title"] = "Rob's Blog";
+}
+
+@*<div class="text-center" style="background-color:gray">
+    <h1 class="display-4" style="padding:5px">Welcome to Rob's Blog</h1>  
+</div>*@
+<br />
+@if (SignInManager.IsSignedIn(User))
+{
+    <p class="btn btn-dark">
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+else
+{
+    <h3 >Sign up to start posting!</h3>
+}
+<div class="tweetsDiv">
+    @foreach (var item in Model){
+    <div class="tweetsDiv border-bottom border-info align-content-between">
+        
+        <div class="tweetsDiv userName" >
+            <p>@Html.DisplayFor(modelItem => item.UserName)</p>
+        </div> 
+        <div class="tweetsDiv postTitle text-center " >
+            <p>@Html.DisplayFor(modelItem => item.Title)</p>
+        </div>
+        <div class="tweetsDiv contentDiv text-center">
+            <p id="tweet">@Html.DisplayFor(modelItem => item.Content)</p>
+        </div>
+
+        <div class="tweetsDiv created text-opacity-50">
+            <p>Date:   @Html.DisplayFor(modelItem => item.Created) </p>
+        </div>  
+
+        @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.UserName)
+        {
+            <div class="text-center">
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> </div>
+        }
+            
+    </div>
+    }
+</div>
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@
