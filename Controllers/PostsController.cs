@@ -25,8 +25,14 @@ namespace LetsChatFinal.Controllers
             /*return _context.Posts != null ? 
                         View(await _context.Posts.ToListAsync()) :
                         Problem("Entity set 'PostContext.Movies'  is null.");*/
-            var q = _context.Posts.OrderByDescending(s => s.Created);
-            return View(q);
+            const int pageSize = 20;
+
+            var posts = await _context.Posts
+                .OrderByDescending(s => s.Created)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return View(posts);
         }
 
         // GET: Posts/Details/5
@@ -62,19 +68,40 @@ namespace LetsChatFinal.Controllers
         [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Title,Content,Created, UserName")] Post post)
         {
+            try
+            {
+                if (post.Title == null)
+                {
+                    // Handle null Title (e.g., provide a default value)
+                    post.Title = " ";
+                }
 
-            Post p = new Post();
-            p.Id = post.Id;
-            p.Title = post.Title;
-            p.Content = post.Content;
-            p.Created = DateTime.Now;
-            p.UserName = User.Identity.Name;
+                if (post.Content == null)
+                {
+                    // Handle null Content (e.g., provide a default value)
+                    post.Content = " ";
+                }
 
-            _context.Posts.Add(p);
 
-            await _context.SaveChangesAsync();
+                Post p = new Post();
+                p.Id = post.Id;
+                p.Title = post.Title;
+                p.Content = post.Content;
+                p.Created = DateTime.Now;
+                p.UserName = User.Identity.Name;
 
-            return RedirectToAction(nameof(Index));
+                _context.Posts.Add(p);
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            catch (Exception ex)
+            {
+                // Handle the exception (log it, display an error message, etc.)
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // GET: Posts1/Edit/5

@@ -4,41 +4,42 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Post</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-            <br />
-            @*<div class="form-group">
-                <label asp-for="Created" class="control-label"></label>
-                <input asp-for="Created" class="form-control" />
-                <span asp-validation-for="Created" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div style="margin: 0 auto; width: 50%;">
+    <h1 >Create</h1>
+    <hr style="border: double #333; height: 5px;">
+    <div style="border: 2px solid #057678; padding: 20px; border-radius: 8px;">
+        <div class="col-md-4" >
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @*<div class="form-group">
+                    <label asp-for="Title" class="control-label" style="font-family: 'Roboto'; font-size:large"></label>
+                    <input asp-for="Title" class="form-control" style="transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f0f0';" onmouseout="this.style.backgroundColor='white';" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <label asp-for="Content" class="control-label" style="font-family: 'Roboto'; font-size:large"></label>
+                    <input asp-for="Content" class="form-control" style="transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f0f0';" onmouseout="this.style.backgroundColor='white';" />
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <br />
+                @*<div class="form-group">
+                    <label asp-for="Created" class="control-label"></label>
+                    <input asp-for="Created" class="form-control" />
+                    <span asp-validation-for="Created" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <br />
+        <a asp-action="Index">Back to List</a>
+    </div>
 
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
