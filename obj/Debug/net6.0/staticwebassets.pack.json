@@ -5,6 +5,22 @@
       "PackagePath": "staticwebassets\\LetsChatFinal.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\12018\\source\\repos\\LetsChatFinal\\wwwroot\\App_Data\\LetsChatFinal.db",
+      "PackagePath": "staticwebassets\\App_Data\\LetsChatFinal.db"
+    },
+    {
+      "Id": "C:\\Users\\12018\\source\\repos\\LetsChatFinal\\wwwroot\\App_Data\\Posts.db",
+      "PackagePath": "staticwebassets\\App_Data\\Posts.db"
+    },
+    {
+      "Id": "C:\\Users\\12018\\source\\repos\\LetsChatFinal\\wwwroot\\App_Data\\Posts.db-shm",
+      "PackagePath": "staticwebassets\\App_Data\\Posts.db-shm"
+    },
+    {
+      "Id": "C:\\Users\\12018\\source\\repos\\LetsChatFinal\\wwwroot\\App_Data\\Posts.db-wal",
+      "PackagePath": "staticwebassets\\App_Data\\Posts.db-wal"
+    },
+    {
       "Id": "C:\\Users\\12018\\source\\repos\\LetsChatFinal\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

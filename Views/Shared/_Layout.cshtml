@@ -7,56 +7,31 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <title>@ViewData["Title"] - LetsChatFinal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LetsChatFinal.styles.css" asp-append-version="true" />
 </head>
 <body>
-    @*<header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Posts" asp-action="Index">Lets  Chat</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item" >
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Index">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>*@
     @if (SignInManager.IsSignedIn(User))
     {
         <div class="header">
-        <div class="sides blog">
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">HOME</a>
-            <a asp-area="" asp-controller="Posts" asp-action="Index" class="logo">BLOG</a>
-            @*<a asp-area="" asp-controller="Project" asp-action="Index" class="logo">PROJECTS</a>*@
-            <a asp-area="" asp-controller="Skills" asp-action="Index" class="logo">SKILLS</a>
-        </div>
-        <div class="sides login">
-          <div class="dropdown"> 
-            <li class=" nav-item">
-                <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-             </li>
-             <li class="nav-item" style="margin-bottom:2px">
-                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Posts", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-white">Logout</button>
-                </form>
-            </li>
-          </div>
-        </div>
+            <div class="sides login">
+              <div class="dropdown"> 
+                <li class=" nav-item">
+                    <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                 </li>
+                 <li class="nav-item" style="margin-bottom:2px">
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Posts", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-white">Logout</button>
+                    </form>
+                </li>
+              </div>
+            </div>
         <div class="info">
         <h1>Rob's Blog</h1>
         <div class="meta">
@@ -69,22 +44,6 @@
     else
     {
       <div class="header">
-        <div class="sides blog">
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">HOME</a>
-            <a asp-area="" asp-controller="Posts" asp-action="Index" class="logo">BLOG</a>
-             @*<a asp-area="" asp-controller="Project" asp-action="Index" class="logo">PROJECTS</a>*@
-            <a asp-area="" asp-controller="Skills" asp-action="Index" class="logo">SKILLS</a>
-        </div>
-        <div class="sides login">
-          <div class="dropdown"> 
-            LOG ON
-            <div class="dropdown-content" >
-            <a id="register" asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
-            <a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-          </div>
-        </div>
         <div class="info">
         <h1>Rob's Blog</h1>
         <div class="meta">
@@ -94,20 +53,48 @@
       </div>
       </div>
     }
-    <div class="backDiv container">
-        <main role="main" class="pb-3">
+
+    <!-- Menu relocated below header -->
+    <div class="menu-container">
+        <div class="dropdown">
+            <button id="menu-toggle-button" class="menu-button">MENU</button>
+            <div class="dropdown-content menu" id="menu-dropdown">
+                <a asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
+                <a asp-area="" asp-controller="Posts" asp-action="Index">BLOG</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - LetsChatFinal - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        // Menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.getElementById('menu-toggle-button');
+            const menuDropdown = document.getElementById('menu-dropdown');
+            
+            if (menuButton && menuDropdown) {
+                menuButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    menuDropdown.classList.toggle('is-open');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!menuButton.contains(e.target) && !menuDropdown.contains(e.target)) {
+                        menuDropdown.classList.remove('is-open');
+                    }
+                });
+            }
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,42 +1,42 @@
 using LetsChatFinal.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using LetsChatFinal.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("LetsChatFinalContextConnection") ?? throw new InvalidOperationException("Connection string 'LetsChatFinalContextConnection' not found.");
 
-builder.Services.AddDbContext<LetsChatFinalContext>(options =>
-    options.UseSqlite(connectionString));;
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<LetsChatFinalContext>();;
-
-
-
-
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllersWithViews();
 
+// Register PostContext for blog posts (keep this if still in use)
 builder.Services.AddDbContext<PostContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultSqlLite")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("PostContext")));
+
+// Register Identity services
+builder.Services.AddDbContext<LetsChatFinalContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("LetsChatFinalContextConnection")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<LetsChatFinalContext>();
+
+// Add Razor Pages for Identity
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-app.UseAuthentication();;
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

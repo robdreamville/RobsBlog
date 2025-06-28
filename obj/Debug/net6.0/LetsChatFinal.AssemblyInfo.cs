@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LetsChatFinal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d44c00364cd0f881db229c248f519e1bec8b415")]
 [assembly: System.Reflection.AssemblyProductAttribute("LetsChatFinal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LetsChatFinal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

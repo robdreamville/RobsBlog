@@ -276,7 +276,6 @@ C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\staticwebassets.devel
 C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\scopedcss\bundle\LetsChatFinal.styles.css
 C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\scopedcss\projectbundle\LetsChatFinal.bundle.scp.css
-C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\LetsChatFinal.csproj.CopyComplete
 C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\LetsChatFinal.dll
 C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\refint\LetsChatFinal.dll
 C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\LetsChatFinal.pdb
@@ -295,3 +294,7 @@ C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\staticwebassets\msbui
 C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.LetsChatFinal.props
 C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.LetsChatFinal.props
 C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\12018\source\repos\LetsChatFinal\bin\Debug\net6.0\appsettings.Production.json
+C:\Users\12018\source\repos\LetsChatFinal\bin\Debug\net6.0\web.config
+C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\LetsChatFinal.sourcelink.json
+C:\Users\12018\source\repos\LetsChatFinal\obj\Debug\net6.0\LetsChat.BEBF04B9.Up2Date
