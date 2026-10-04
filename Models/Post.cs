@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace LetsChatFinal.Models
 {
@@ -7,11 +7,11 @@ namespace LetsChatFinal.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(150)]
         public string Title { get; set; } = string.Empty;
 
         [Required]
-        [StringLength(300)]
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; } = string.Empty;
 
         [DataType(DataType.DateTime)]
