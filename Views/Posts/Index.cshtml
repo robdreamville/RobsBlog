@@ -1,47 +1,52 @@
-﻿@model IEnumerable<LetsChatFinal.Models.Post>
+@model IEnumerable<LetsChatFinal.Models.Post>
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
 
 @{
-    ViewData["Title"] = "Rob's Blog";
+    ViewData["Title"] = "Posts";
 }
 
-<div class="blog-header">
-    <h1 class="blog-title">Rob's Blog</h1>
-    <p class="blog-subtitle">Thoughts on technology, community, and the journey from Jersey City to the tech world</p>
-</div>
-
-@if (SignInManager.IsSignedIn(User))
-{
-    <div class="create-post-section">
-        <a asp-action="Create" class="create-btn">Create New Post</a>
-    </div>
-}
-
-<div class="posts-feed">
-    @foreach (var item in Model.OrderByDescending(p => p.Created))
-    {
-        <article class="post-article">
-            <header class="post-header">
-                <h2 class="post-title">@item.Title</h2>
-                <div class="post-meta">
-                    <span class="post-author">By Rob</span>
-                    <span class="post-date">@item.Created.ToString("MM/dd/yyyy")</span>
-                </div>
-            </header>
-            
-            <div class="post-content">
-                @item.Content
+<section class="section">
+    <div class="wrap-narrow">
+        <div class="list-header">
+            <div>
+                <span class="eyebrow">StreetCode</span>
+                <h2 style="margin:0">All posts</h2>
             </div>
-
-            @if (SignInManager.IsSignedIn(User) && User.Identity.Name == item.UserName)
+            @if (SignInManager.IsSignedIn(User))
             {
-                <div class="post-actions">
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="delete-btn">Delete Post</a>
-                </div>
+                <a class="btn btn-accent btn-sm" asp-action="Create">+ New Post</a>
             }
-        </article>
-    }
-</div>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <ul class="post-list">
+                @foreach (var item in Model.OrderByDescending(p => p.Created))
+                {
+                    <li class="post-row">
+                        <span class="post-date">@item.Created.ToString("MMMM d, yyyy")</span>
+                        <h3><a asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h3>
+                        <p class="post-excerpt">@item.Content</p>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <div class="post-row-actions">
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" style="color:#b3261e">Delete</a>
+                            </div>
+                        }
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="empty-note">No posts yet.</p>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="btn btn-accent" asp-action="Create">Write the first one</a>
+            }
+        }
+    </div>
+</section>
