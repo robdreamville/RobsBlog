@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\LetsChatFinal.props" />
-</Project>
