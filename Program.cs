@@ -20,11 +20,11 @@ Directory.CreateDirectory(dataDir);
 
 // Register PostContext for blog posts (keep this if still in use)
 builder.Services.AddDbContext<PostContext>(options =>
-    options.UseSqlite($"Data Source={Path.Combine(dataDir, "Posts.db")}"));
+    options.UseSqlite($"Data Source={Path.Combine(dataDir, "blog-posts.db")}"));
 
 // Register Identity services
 builder.Services.AddDbContext<LetsChatFinalContext>(options =>
-    options.UseSqlite($"Data Source={Path.Combine(dataDir, "LetsChatFinal.db")}"));
+    options.UseSqlite($"Data Source={Path.Combine(dataDir, "blog-identity.db")}"));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<LetsChatFinalContext>();
@@ -34,12 +34,14 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Create/migrate the SQLite databases on startup (fixes first-run 500s)
+// Create the SQLite databases on startup from the current model.
+// (EnsureCreated, not Migrate: the checked-in 2022 migrations target a stale
+//  "Movies" table from a tutorial and do not match the blog schema.)
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    services.GetRequiredService<PostContext>().Database.Migrate();
-    services.GetRequiredService<LetsChatFinalContext>().Database.Migrate();
+    services.GetRequiredService<PostContext>().Database.EnsureCreated();
+    services.GetRequiredService<LetsChatFinalContext>().Database.EnsureCreated();
 }
 
 // Configure the HTTP request pipeline
