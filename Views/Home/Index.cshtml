@@ -6,44 +6,50 @@
 
 <section class="hero">
     <div class="wrap">
-        <span class="eyebrow">StreetCode</span>
-        <h1>Notes on building AI systems.</h1>
-        <p class="lead">I'm Roberto Galdamez — I build multi-agent AI systems and write about what I learn along the way: the builds, the breakdowns, and the thinking behind them.</p>
+        <span class="eyebrow">~/streetcode --notes-on-building-ai</span>
+        <h1>Notes on building <span class="volt">AI systems</span><span class="cursor">_</span></h1>
+        <p class="lead">I'm <strong>Roberto Galdamez</strong> — I build multi-agent AI systems and write about what I learn: the builds, the breakdowns, and the thinking behind them.</p>
         <div class="hero-cta">
-            <a class="btn btn-accent" asp-controller="Posts" asp-action="Index">Read the posts</a>
-            <a class="btn btn-outline" href="#projects">See the projects</a>
+            <a class="btn btn-accent" asp-controller="Posts" asp-action="Index">read the posts</a>
+            <a class="btn btn-outline" href="#projects">see the projects</a>
+        </div>
+        <div class="hero-meta">
+            <span><b>03</b> systems shipped</span>
+            <span><b>01</b> human writing</span>
+            <span><b>00</b> fluff</span>
         </div>
     </div>
 </section>
 
 <section class="section" id="projects">
     <div class="wrap">
-        <h2 class="section-title">Projects</h2>
-        <p class="section-sub">Things I've built — real systems, not tutorials.</p>
+        <span class="eyebrow">projects</span>
+        <h2 class="section-title">Things I've built</h2>
+        <p class="section-sub">Real systems, not tutorials.</p>
         <div class="project-grid">
             <div class="project-card">
-                <h3>NeuraStream</h3>
+                <h3>NeuraStream <span class="mono-x">/v1</span></h3>
                 <div class="project-tags">
-                    <span class="tag">LangGraph</span><span class="tag">FastAPI</span><span class="tag">Gemini</span>
+                    <span class="tag">langgraph</span><span class="tag">fastapi</span><span class="tag">gemini</span>
                 </div>
                 <p>Multi-agent platform that turns Reddit signal into structured analysis — scraping, topic clustering, and an honest-critic quality check, served on a live dashboard.</p>
-                <a class="project-link" href="https://github.com/robdreamville/NeuraStream" target="_blank" rel="noopener">View on GitHub →</a>
+                <a class="project-link" href="https://github.com/robdreamville/NeuraStream" target="_blank" rel="noopener">view on github <span class="arrow">→</span></a>
             </div>
             <div class="project-card">
-                <h3>SportsOracle</h3>
+                <h3>SportsOracle <span class="mono-x">/v1</span></h3>
                 <div class="project-tags">
-                    <span class="tag">BERTopic</span><span class="tag">Streamlit</span><span class="tag">Python</span>
+                    <span class="tag">bertopic</span><span class="tag">streamlit</span><span class="tag">python</span>
                 </div>
                 <p>Scrapes Reddit and ESPN, clusters the conversation with BERTopic, and serves it up as a daily sports-intelligence briefing.</p>
-                <a class="project-link" href="https://github.com/robdreamville/sportsoracle" target="_blank" rel="noopener">View on GitHub →</a>
+                <a class="project-link" href="https://github.com/robdreamville/sportsoracle" target="_blank" rel="noopener">view on github <span class="arrow">→</span></a>
             </div>
             <div class="project-card">
-                <h3>StreetCode</h3>
+                <h3>StreetCode <span class="mono-x">/live</span></h3>
                 <div class="project-tags">
-                    <span class="tag">ASP.NET Core</span><span class="tag">EF Core</span><span class="tag">Azure</span>
+                    <span class="tag">asp.net core</span><span class="tag">ef core</span><span class="tag">azure</span>
                 </div>
                 <p>This blog — a from-scratch publishing platform on .NET 8 and Azure, rebuilt piece by piece in the open.</p>
-                <a class="project-link" href="https://github.com/robdreamville/RobsBlog" target="_blank" rel="noopener">View on GitHub →</a>
+                <a class="project-link" href="https://github.com/robdreamville/RobsBlog" target="_blank" rel="noopener">view on github <span class="arrow">→</span></a>
             </div>
         </div>
     </div>
@@ -52,8 +58,11 @@
 <section class="section-tight">
     <div class="wrap">
         <div class="list-header">
-            <h2>Latest posts</h2>
-            <a class="btn btn-outline btn-sm" asp-controller="Posts" asp-action="Index">All posts</a>
+            <div>
+                <span class="eyebrow">latest</span>
+                <h2 style="margin:0">Fresh off the keyboard</h2>
+            </div>
+            <a class="btn btn-outline btn-sm" asp-controller="Posts" asp-action="Index">all posts</a>
         </div>
         @if (Model != null && Model.Any())
         {
@@ -61,7 +70,7 @@
                 @foreach (var post in Model)
                 {
                     <li class="post-row">
-                        <span class="post-date">@post.Created.ToString("MMMM d, yyyy")</span>
+                        <span class="post-date">@post.Created.ToString("yyyy-MM-dd")</span>
                         <h3><a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Title</a></h3>
                         <p class="post-excerpt">@post.Content</p>
                     </li>
@@ -70,14 +79,14 @@
         }
         else
         {
-            <p class="empty-note">No posts yet — check back soon.</p>
+            <p class="empty-note">// no posts yet — check back soon.</p>
         }
     </div>
 </section>
 
 <section class="section about-strip">
     <div class="wrap">
-        <span class="eyebrow">About</span>
-        <p>Jersey City born and raised, NJCU computer science grad, currently building AI systems while working toward an AI operations role. I write about the work honestly — what's working, what's not, and what I'm figuring out.</p>
+        <span class="eyebrow">about</span>
+        <p><strong>Jersey City</strong> born and raised, <strong>NJCU</strong> computer science grad, currently building AI systems while working toward an AI operations role. I write about the work honestly — what's working, what's not, and what I'm figuring out.</p>
     </div>
 </section>
