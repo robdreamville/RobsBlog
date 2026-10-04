@@ -1,5 +1,6 @@
-﻿using LetsChatFinal.Models;
+using LetsChatFinal.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace LetsChatFinal.Controllers
@@ -7,15 +8,21 @@ namespace LetsChatFinal.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly PostContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, PostContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var latestPosts = await _context.Posts
+                .OrderByDescending(p => p.Created)
+                .Take(3)
+                .ToListAsync();
+            return View(latestPosts);
         }
 
         public IActionResult Privacy()
