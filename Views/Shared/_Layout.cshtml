@@ -7,94 +7,54 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StreetCode</title>
+    <meta name="description" content="StreetCode — notes on building AI systems, by Roberto Galdamez." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/LetsChatFinal.styles.css" asp-append-version="true" />
 </head>
 <body>
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <div class="header">
-            <div class="sides login">
-              <div class="dropdown"> 
-                <li class=" nav-item">
-                    <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-                 </li>
-                 <li class="nav-item" style="margin-bottom:2px">
-                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Posts", new { area = "" })">
-                    <button id="logout" type="submit" class="nav-link btn btn-link text-white">Logout</button>
+    <header class="site-nav">
+        <div class="nav-inner">
+            <a class="wordmark" asp-area="" asp-controller="Home" asp-action="Index">StreetCode</a>
+            <nav class="nav-links">
+                <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-area="" asp-controller="Posts" asp-action="Index">Posts</a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a class="btn btn-accent btn-sm" asp-area="" asp-controller="Posts" asp-action="Create">+ New Post</a>
+                    <form class="nav-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                        <button type="submit" class="nav-link-btn">Log out</button>
                     </form>
-                </li>
-              </div>
-            </div>
-        <div class="info">
-        <h1>Rob's Blog</h1>
-        <div class="meta">
-          <a  href="https://www.linkedin.com/in/roberto-galdamez/" target="_b" class="author"></a><br>
-          By <a href="https://www.linkedin.com/in/roberto-galdamez/" target="_b">Roberto Galdamez</a> on July 5, 2022
+                }
+                else
+                {
+                    <a asp-area="Identity" asp-page="/Account/Login">Log in</a>
+                }
+            </nav>
         </div>
-      </div>
-      </div>
-    }
-    else
-    {
-      <div class="header">
-        <div class="info">
-        <h1>Rob's Blog</h1>
-        <div class="meta">
-          <a  href="https://www.linkedin.com/in/roberto-galdamez/" target="_b" class="author"></a><br>
-          By <a href="https://www.linkedin.com/in/roberto-galdamez/" target="_b">Roberto Galdamez</a> on July 5, 2022
-        </div>
-      </div>
-      </div>
-    }
+    </header>
 
-    <!-- Menu relocated below header -->
-    <div class="menu-container">
-        <div class="dropdown">
-            <button id="menu-toggle-button" class="menu-button">MENU</button>
-            <div class="dropdown-content menu" id="menu-dropdown">
-                <a asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
-                <a asp-area="" asp-controller="Posts" asp-action="Index">BLOG</a>
-            </div>
-        </div>
-    </div>
+    <main role="main">
+        @RenderBody()
+    </main>
 
-    <div class="main-content">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span>StreetCode — by Roberto Galdamez</span>
+            <span class="footer-links">
+                <a href="https://www.linkedin.com/in/roberto-galdamez/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://github.com/robdreamville" target="_blank" rel="noopener">GitHub</a>
+            </span>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-        // Menu toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuButton = document.getElementById('menu-toggle-button');
-            const menuDropdown = document.getElementById('menu-dropdown');
-            
-            if (menuButton && menuDropdown) {
-                menuButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    menuDropdown.classList.toggle('is-open');
-                });
-                
-                // Close menu when clicking outside
-                document.addEventListener('click', function(e) {
-                    if (!menuButton.contains(e.target) && !menuDropdown.contains(e.target)) {
-                        menuDropdown.classList.remove('is-open');
-                    }
-                });
-            }
-        });
-    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
