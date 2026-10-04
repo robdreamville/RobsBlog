@@ -30,7 +30,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<LetsChatFinalContext>();
 
 // Add Razor Pages for Identity
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    // Sole-user blog: block public registration (only the seeded account can log in)
+    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Register");
+});
 
 var app = builder.Build();
 
@@ -42,6 +46,34 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     services.GetRequiredService<PostContext>().Database.EnsureCreated();
     services.GetRequiredService<LetsChatFinalContext>().Database.EnsureCreated();
+}
+
+// Seed the sole blog author account on first run.
+// Set BLOG_ADMIN_EMAIL + BLOG_ADMIN_PASSWORD in Azure App Settings (never in code).
+var adminEmail = Environment.GetEnvironmentVariable("BLOG_ADMIN_EMAIL");
+var adminPassword = Environment.GetEnvironmentVariable("BLOG_ADMIN_PASSWORD");
+if (!string.IsNullOrEmpty(adminEmail) && !string.IsNullOrEmpty(adminPassword))
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+        if (await userManager.FindByEmailAsync(adminEmail) is null)
+        {
+            var admin = new IdentityUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                EmailConfirmed = true
+            };
+            var created = await userManager.CreateAsync(admin, adminPassword);
+            if (!created.Succeeded)
+            {
+                var log = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                log.LogError("Admin seed failed: {Errors}",
+                    string.Join("; ", created.Errors.Select(e => e.Description)));
+            }
+        }
+    }
 }
 
 // Configure the HTTP request pipeline
