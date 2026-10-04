@@ -1,45 +1,38 @@
-﻿@model LetsChatFinal.Models.Post
+@model LetsChatFinal.Models.Post
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "New Post";
 }
 
-<div style="margin: 0 auto; width: 50%;">
-    <h1 >Create</h1>
-    <hr style="border: double #333; height: 5px;">
-    <div style="border: 2px solid #057678; padding: 20px; border-radius: 8px;">
-        <div class="col-md-4" >
+<section class="section">
+    <div class="wrap-narrow">
+        <span class="eyebrow">StreetCode</span>
+        <h2 style="margin:0 0 0.5rem">Write a post</h2>
+        <p class="section-sub">Say what you want to say — it'll go live the second you hit publish.</p>
+
+        <div class="form-card">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @*<div class="form-group">
-                    <label asp-for="Title" class="control-label" style="font-family: 'Roboto'; font-size:large"></label>
-                    <input asp-for="Title" class="form-control" style="transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f0f0';" onmouseout="this.style.backgroundColor='white';" />
+                <div class="field">
+                    <label asp-for="Title">Title</label>
+                    <input asp-for="Title" type="text" placeholder="Give it a headline..." autocomplete="off" />
                     <span asp-validation-for="Title" class="text-danger"></span>
-                </div>*@
-                <div class="form-group">
-                    <label asp-for="Content" class="control-label" style="font-family: 'Roboto'; font-size:large"></label>
-                    <input asp-for="Content" class="form-control" style="transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#f0f0f0';" onmouseout="this.style.backgroundColor='white';" />
-                    <span asp-validation-for="Content" class="text-danger"></span>
                 </div>
-                <br />
-                @*<div class="form-group">
-                    <label asp-for="Created" class="control-label"></label>
-                    <input asp-for="Created" class="form-control" />
-                    <span asp-validation-for="Created" class="text-danger"></span>
-                </div>*@
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="field">
+                    <label asp-for="Content">Content</label>
+                    <textarea asp-for="Content" placeholder="Write it like you'd say it..."></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                    <div class="hint">Line breaks are kept as-is — paste straight from LinkedIn if you want.</div>
+                </div>
+                <div class="field" style="margin-bottom:0">
+                    <input type="submit" value="Publish" class="btn btn-accent" />
+                    <a asp-action="Index" style="margin-left:1rem">Cancel</a>
                 </div>
             </form>
         </div>
     </div>
+</section>
 
-    <div>
-        <br />
-        <a asp-action="Index">Back to List</a>
-    </div>
-
-</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
