@@ -1,21 +1,83 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@model IEnumerable<LetsChatFinal.Models.Post>
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="hero-section">
-    <h1 class="hero-title">Hey there! 👋 I'm Rob, and I'm diving deep into the world of AI and tech.</h1>
-    <p class="hero-subtitle">From Jersey City to the cutting edge of artificial intelligence, I'm on a mission to bridge communities and technology through learning, building, and sharing.</p>
-</div>
+<section class="hero">
+    <div class="wrap">
+        <span class="eyebrow">StreetCode</span>
+        <h1>Notes on building AI systems.</h1>
+        <p class="lead">I'm Roberto Galdamez — I build multi-agent AI systems and write about what I learn along the way: the builds, the breakdowns, and the thinking behind them.</p>
+        <div class="hero-cta">
+            <a class="btn btn-accent" asp-controller="Posts" asp-action="Index">Read the posts</a>
+            <a class="btn btn-outline" href="#projects">See the projects</a>
+        </div>
+    </div>
+</section>
 
-<div class="about-content">
-    <h2>About Me</h2>
-    <p class="lead">Hey, I'm Roberto Galdamez a first generation American born and raised in the heart of Jersey City.</p>
-    
-    <p>I recently graduated with a degree in Computer Science from New Jersey City University, and my path into tech has been anything but traditional. Growing up in an inner city neighborhood as the son of Honduran immigrants, I experienced firsthand the lack of access to resources and opportunities. But those challenges also sparked a deeper drive—to not only build a better life for myself but to help reshape the narrative around who belongs in tech.</p>
-    
-    <p>I'm passionate about full stack development and machine learning, and lately, I've been diving deeper into artificial intelligence—not just as a career path, but as a way to solve real world problems and push the boundaries of what's possible. My goal is to contribute to AI in a way that's ethical, accessible, and meaningful, especially for communities like the one I grew up in.</p>
-    
-    <p>As tech continues to shape every part of our lives, I've realized how few people truly understand the systems behind the screen. That gap—between the tech we use and the people who create itdrives me. I care deeply about expanding STEM education and helping young people, especially those battling depression, anxiety, or selfdoubt, realize they can thrive in this space too.</p>
-    
-    <p>Jersey City is becoming a growing tech hub, yet so many of the opportunities bypass the local community. I've seen the talent here, and I know what's possible when someone is given a chance. My journey is about more than just breaking into tech it's about making space for others to follow.</p>
-</div>
+<section class="section" id="projects">
+    <div class="wrap">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-sub">Things I've built — real systems, not tutorials.</p>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>NeuraStream</h3>
+                <div class="project-tags">
+                    <span class="tag">LangGraph</span><span class="tag">FastAPI</span><span class="tag">Gemini</span>
+                </div>
+                <p>Multi-agent platform that turns Reddit signal into structured analysis — scraping, topic clustering, and an honest-critic quality check, served on a live dashboard.</p>
+                <a class="project-link" href="https://github.com/robdreamville/NeuraStream" target="_blank" rel="noopener">View on GitHub →</a>
+            </div>
+            <div class="project-card">
+                <h3>SportsOracle</h3>
+                <div class="project-tags">
+                    <span class="tag">BERTopic</span><span class="tag">Streamlit</span><span class="tag">Python</span>
+                </div>
+                <p>Scrapes Reddit and ESPN, clusters the conversation with BERTopic, and serves it up as a daily sports-intelligence briefing.</p>
+                <a class="project-link" href="https://github.com/robdreamville/sportsoracle" target="_blank" rel="noopener">View on GitHub →</a>
+            </div>
+            <div class="project-card">
+                <h3>StreetCode</h3>
+                <div class="project-tags">
+                    <span class="tag">ASP.NET Core</span><span class="tag">EF Core</span><span class="tag">Azure</span>
+                </div>
+                <p>This blog — a from-scratch publishing platform on .NET 8 and Azure, rebuilt piece by piece in the open.</p>
+                <a class="project-link" href="https://github.com/robdreamville/RobsBlog" target="_blank" rel="noopener">View on GitHub →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-tight">
+    <div class="wrap">
+        <div class="list-header">
+            <h2>Latest posts</h2>
+            <a class="btn btn-outline btn-sm" asp-controller="Posts" asp-action="Index">All posts</a>
+        </div>
+        @if (Model != null && Model.Any())
+        {
+            <ul class="post-list">
+                @foreach (var post in Model)
+                {
+                    <li class="post-row">
+                        <span class="post-date">@post.Created.ToString("MMMM d, yyyy")</span>
+                        <h3><a asp-controller="Posts" asp-action="Details" asp-route-id="@post.Id">@post.Title</a></h3>
+                        <p class="post-excerpt">@post.Content</p>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="empty-note">No posts yet — check back soon.</p>
+        }
+    </div>
+</section>
+
+<section class="section about-strip">
+    <div class="wrap">
+        <span class="eyebrow">About</span>
+        <p>Jersey City born and raised, NJCU computer science grad, currently building AI systems while working toward an AI operations role. I write about the work honestly — what's working, what's not, and what I'm figuring out.</p>
+    </div>
+</section>
