@@ -27,7 +27,7 @@
                 {
                     <li class="post-row">
                         <span class="post-date">@item.Created.ToString("MMMM d, yyyy")</span>
-                        <h3><a asp-action="Details" asp-route-id="@item.Id">@item.Title</a></h3>
+                        <h3><a asp-action="Details" asp-route-id="@item.Id">@(string.IsNullOrWhiteSpace(item.Title) ? "(untitled)" : item.Title)</a></h3>
                         <p class="post-excerpt">@item.Content</p>
                         @if (SignInManager.IsSignedIn(User))
                         {
