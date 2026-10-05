@@ -4,12 +4,12 @@
 @inject SignInManager<IdentityUser> SignInManager
 
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = string.IsNullOrWhiteSpace(Model.Title) ? "Untitled" : Model.Title;
 }
 
 <article class="article">
     <div class="wrap-narrow">
-        <h1 class="article-title">@Model.Title</h1>
+        <h1 class="article-title">@(string.IsNullOrWhiteSpace(Model.Title) ? "Untitled" : Model.Title)</h1>
         <div class="article-meta">
             By Roberto Galdamez &middot; @Model.Created.ToString("MMMM d, yyyy")
         </div>
